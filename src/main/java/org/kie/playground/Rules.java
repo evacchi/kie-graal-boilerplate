@@ -68,23 +68,23 @@ public class Rules {
         if (!"Mario is older than Mark".equals( result )) {
             throw new IllegalStateException();
         }
-//
-//        result.setValue( null );
-//        ksession.delete( marioFH );
-//        ksession.fireAllRules();
-//        if (result.getValue() != null) {
-//            throw new IllegalStateException();
-//        }
-//
-//        mark.setAge( 34 );
-//        ksession.update( markFH, mark, "age" );
-//
-//        ksession.fireAllRules();
-//        if (!"Edson is older than Mark".equals( result.getValue() )) {
-//            throw new IllegalStateException();
-//        }
-//
-//        System.out.println(result.getValue());
+
+        result =( null );
+        ksession.delete( marioFH );
+        ksession.fireAllRules();
+        if (result != null) {
+            throw new IllegalStateException();
+        }
+
+        mark.setAge( 34 );
+        ksession.update( markFH, mark, "age" );
+
+        ksession.fireAllRules();
+        if (!"Edson is older than Mark".equals( result )) {
+            throw new IllegalStateException();
+        }
+
+        System.out.println(result );
 
         System.out.println("all done");
 

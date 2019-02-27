@@ -14,6 +14,18 @@
   <dependencies>
     <dependency>
       <groupId>org.drools</groupId>
+      <artifactId>drools-model-compiler</artifactId>
+      <version>8.0.0-SNAPSHOT</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.drools</groupId>
+          <artifactId>drools-core-dynamic</artifactId></exclusion>
+      </exclusions>
+
+    </dependency>
+
+    <dependency>
+      <groupId>org.drools</groupId>
       <artifactId>drools-canonical-model</artifactId>
       <version>8.0.0-SNAPSHOT</version>
       <exclusions>
@@ -31,10 +43,6 @@
           <groupId>org.drools</groupId>
           <artifactId>drools-core-dynamic</artifactId>
         </exclusion>
-        <exclusion>
-          <artifactId>protobuf-java</artifactId>
-          <groupId>com.google.protobuf</groupId>
-        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -51,20 +59,13 @@
           <groupId>org.drools</groupId>
           <artifactId>drools-core-dynamic</artifactId>
         </exclusion>
-        <exclusion>
-          <artifactId>protobuf-java</artifactId>
-          <groupId>com.google.protobuf</groupId>
-        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-core-static</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-model-compiler</artifactId>
-    </dependency>
+
   </dependencies>
   <build>
   <plugins>
@@ -82,7 +83,7 @@
       </executions>
       <configuration>
         <mainClass>org.kie.playground.RuleContainer</mainClass>
-        <buildArgs>--allow-incomplete-classpath</buildArgs>
+        <buildArgs>--report-unsupported-elements-at-runtime</buildArgs>
       </configuration>
     </plugin>
     <plugin>

@@ -1,62 +1,39 @@
 package org.kie.playground;
 
-import java.util.Collections;
-import java.util.Objects;
+import org.kie.api.DataSource;
+import org.kie.api.rules.RuleUnitInstance;
 
-import org.jbpm.process.instance.InternalProcessRuntime;
+import static java.util.Arrays.asList;
+
 //import org.jbpm.process.instance.LightProcessRuntime;
 //import org.jbpm.process.instance.LightProcessRuntimeContext;
 //import org.jbpm.process.instance.LightProcessRuntimeServiceProvider;
-import org.jbpm.ruleflow.core.RuleFlowProcess;
-import org.jbpm.ruleflow.core.RuleFlowProcessFactory;
-import org.kie.api.runtime.process.ProcessInstance;
 
 public class Main {
 
-    final static Main m = new Main();
+    final static Main main = new Main();
 
-    final InternalProcessRuntime rt;
-    String result;
+    final MyModule module;
+    final RuleUnitInstance<People> instance;
 
     Main() {
-        RuleFlowProcessFactory factory =
-                RuleFlowProcessFactory.createProcess("org.kie.api2.MyProcessUnit");
-        factory
-                // Header
-                .name("HelloWorldProcess")
-                .version("1.0")
-                .packageName("org.jbpm")
-                // Nodes
-                .startNode(1).name("Start").done()
-                .actionNode(2).name("Action")
-                .action(ctx -> {
-                    System.out.println("Hello, World!");
-                    result = "hello!";
-                }).done()
-                .endNode(3).name("End").done()
-                // Connections
-                .connection(1, 2)
-                .connection(2, 3);
-        RuleFlowProcess process = factory.validate().getProcess();
-
-//        LightProcessRuntimeServiceProvider services =
-//                new LightProcessRuntimeServiceProvider();
-//
-//        LightProcessRuntimeContext rtc = new LightProcessRuntimeContext(
-//                Collections.singletonList(process));
-//
-//        rt = new LightProcessRuntime(rtc, services);
-        rt=null;
-
-        System.out.println("DONE INIT");
+        module = new MyModule();
+        instance = module.peopleRuleUnit(new People());
     }
 
-    void run() {
-        ProcessInstance pi = rt.startProcess("org.kie.api2.MyProcessUnit");
-        Objects.requireNonNull(result);
+    public void run() {
+        People people = instance.workingMemory();
+        DataSource<Person> persons = people.persons();
+        persons.addAll(asList(
+                new Person("Mark", 37),
+                new Person("Edson", 35),
+                new Person("Mario", 40)
+        ));
+
+        instance.fire();
     }
 
     public static void main(String[] args) {
-        m.run();
+        main.run();
     }
 }

@@ -82,8 +82,9 @@
         </execution>
       </executions>
       <configuration>
-        <mainClass>org.kie.playground.RuleContainer</mainClass>
-        <buildArgs>--report-unsupported-elements-at-runtime</buildArgs>
+        <mainClass>org.kie.playground.Main</mainClass>
+        <buildArgs>-H:ReflectionConfigurationFiles=${project.basedir}/reflection.json</buildArgs>
+<!--        <buildArgs>&#45;&#45;report-unsupported-elements-at-runtime</buildArgs>-->
       </configuration>
     </plugin>
     <plugin>

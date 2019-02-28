@@ -1,28 +1,26 @@
 package org.kie.playground;
 
 import org.kie.api.DataSource;
-import org.kie.api.rules.RuleUnitInstance;
+import org.kie.api.process.ProcessInstance;
 
 import static java.util.Arrays.asList;
-
-//import org.jbpm.process.instance.LightProcessRuntime;
-//import org.jbpm.process.instance.LightProcessRuntimeContext;
-//import org.jbpm.process.instance.LightProcessRuntimeServiceProvider;
 
 public class Main {
 
     final static Main main = new Main();
 
-    final MyModule module;
-    final RuleUnitInstance<People> instance;
+    final PeopleModule module;
+    final ProcessInstance<People> instance;
 
     Main() {
-        module = new MyModule();
-        instance = module.peopleRuleUnit(new People());
+        this.module = new PeopleModule();
+        this.instance = module
+                .peopleProcess()
+                .createInstance(new People());
     }
 
-    public void run() {
-        People people = instance.workingMemory();
+    void run() {
+        People people = instance.variables();
         DataSource<Person> persons = people.persons();
         persons.addAll(asList(
                 new Person("Mark", 37),
@@ -30,7 +28,7 @@ public class Main {
                 new Person("Mario", 40)
         ));
 
-        instance.fire();
+        instance.start();
     }
 
     public static void main(String[] args) {

@@ -8,7 +8,7 @@ public class RuleUnitInstance<T> {
     private final T workingMemory;
     private final KieSession rt;
 
-    public RuleUnitInstance(KieSession rt, T workingMemory) {
+    public RuleUnitInstance(RuleUnit<T> unit, T workingMemory, KieSession rt) {
         this.rt = rt;
         this.workingMemory = workingMemory;
     }

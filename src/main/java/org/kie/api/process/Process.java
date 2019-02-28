@@ -1,17 +1,20 @@
 package org.kie.api.process;
 
-public abstract class Process<T, U extends ProcessInstance<T>> {
+import org.jbpm.ruleflow.core.RuleFlowProcess;
 
-    private final T variables;
+public abstract class Process<T> {
 
-    public Process(T variables) {
-        this.variables = variables;
+    private final RuleFlowProcess process;
+
+    public Process(RuleFlowProcess process) {
+        this.process = process;
     }
 
-    public abstract U createInstance(ProcessRuntime processRuntime);
+    public ProcessInstance<T> createInstance(T variables) {
+        return new ProcessInstance<>(this, variables);
+    }
 
-
-    public T variables() {
-        return variables;
+    RuleFlowProcess getRuleFlowProcess() {
+        return process;
     }
 }

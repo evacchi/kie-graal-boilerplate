@@ -1,8 +1,0 @@
-package org.kie.playground
-
-rule "test"
-when
-    String()
-then
-    System.out.println(1);
-end

@@ -9,16 +9,10 @@ import static org.drools.modelcompiler.builder.KieBaseBuilder.createKieBaseFromM
 
 public class RuleUnit<T> {
 
-    private final T workingMemory;
     InternalKnowledgeBase kbase;
 
-    public RuleUnit(Model m, T workingMemory) {
+    public RuleUnit(Model m) {
         this.kbase = createKieBaseFromModel(Collections.singletonList(m));
-        this.workingMemory = workingMemory;
-    }
-
-    public T memory() {
-        return workingMemory;
     }
 
     public RuleUnitInstance<T> createInstance(T workingMemory) {

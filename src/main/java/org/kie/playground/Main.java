@@ -2,6 +2,7 @@ package org.kie.playground;
 
 import org.kie.api.DataSource;
 import org.kie.api.process.ProcessInstance;
+import org.kie.playground.generated.PeopleModule;
 
 import static java.util.Arrays.asList;
 

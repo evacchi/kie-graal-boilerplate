@@ -1,10 +1,11 @@
-package org.kie.playground;
+package org.kie.playground.generated;
 
 import org.jbpm.ruleflow.core.RuleFlowProcess;
 import org.jbpm.ruleflow.core.RuleFlowProcessFactory;
 import org.kie.api.process.Process;
 import org.kie.api.rules.RuleUnitInstance;
 import org.kie.api.runtime.process.ProcessContext;
+import org.kie.playground.People;
 
 public class PeopleProcess extends Process<People> {
 

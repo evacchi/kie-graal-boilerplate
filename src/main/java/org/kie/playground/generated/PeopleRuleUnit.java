@@ -1,4 +1,4 @@
-package org.kie.playground;
+package org.kie.playground.generated;
 
 import org.drools.model.Index;
 import org.drools.model.Model;
@@ -6,6 +6,8 @@ import org.drools.model.Rule;
 import org.drools.model.Variable;
 import org.drools.model.impl.ModelImpl;
 import org.kie.api.rules.RuleUnit;
+import org.kie.playground.People;
+import org.kie.playground.Person;
 
 import static org.drools.model.DSL.declarationOf;
 import static org.drools.model.DSL.on;
@@ -18,11 +20,10 @@ import static org.drools.model.PatternDSL.rule;
 public class PeopleRuleUnit extends RuleUnit<People> {
 
     public PeopleRuleUnit(PeopleModule myModule) {
-        super(initModel(), null);
+        super(initModel(myModule));
     }
 
-
-    private static Model initModel() {
+    private static Model initModel(PeopleModule myModule) {
         Model model;
         Variable<Person> markV = declarationOf(Person.class );
         Variable<Person> olderV = declarationOf(Person.class );

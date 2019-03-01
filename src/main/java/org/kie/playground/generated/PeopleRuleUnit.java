@@ -4,6 +4,7 @@ import org.drools.model.Index;
 import org.drools.model.Model;
 import org.drools.model.Rule;
 import org.drools.model.Variable;
+import org.drools.model.consequences.ConsequenceBuilder;
 import org.drools.model.impl.ModelImpl;
 import org.kie.api.rules.RuleUnit;
 import org.kie.playground.People;
@@ -28,6 +29,10 @@ public class PeopleRuleUnit extends RuleUnit<People> {
         Variable<Person> markV = declarationOf(Person.class );
         Variable<Person> olderV = declarationOf(Person.class );
 
+        ConsequenceBuilder._2<Person, Person> execute =
+                on(olderV, markV)
+                        .execute((p1, p2) -> System.out.println(p1.getName() + " is older than " + p2.getName()));
+
         Rule r = rule("beta" )
                 .build(
                         pattern(markV)
@@ -41,7 +46,7 @@ public class PeopleRuleUnit extends RuleUnit<People> {
                                 .expr("exprC", markV, (p1, p2) -> p1.getAge() > p2.getAge(),
                                       betaIndexedBy( int.class, Index.ConstraintType.GREATER_THAN, 0, p -> p.getAge(), p -> p.getAge() ),
                                       reactOn( "age" )),
-                        on(olderV, markV).execute((p1, p2) -> System.out.println ( p1.getName() + " is older than " + p2.getName()))
+                        execute
                 );
 
         model = new ModelImpl().addRule(r);

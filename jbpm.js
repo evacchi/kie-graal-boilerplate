@@ -10,8 +10,7 @@ factory
     .startNode(1).name("Start").done()
     .actionNode(2).name("Action")
     .action(ctx => {
-        console.log("begin rule action");
-        console.log("end rule action");
+        console.log("this is an actionprotean");
     }).done()
     .endNode(3).name("End").done()
     // Connections
